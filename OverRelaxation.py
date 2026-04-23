@@ -16,24 +16,19 @@ def calcpoint(allvals, x, y, e0, a, w):
 
 def ItThrough(boxvals, target, e0, a, w):
     bvals = copy.deepcopy(boxvals) # make a copy of the matrix
-    noxvals = []                   # empty array for new matrix
     delta = 1                      # starting differenc enot super important bc change almost immediately
 
 
     while delta > target:          # while loop until reach target accuracy
 
         for i in range(len(bvals)):                    # for loop iterate through rows
-            noxvals.append([])                         # add new row to new matrix
             for j in range(len(bvals[i])):             # iterate through columns
                 newent = calcpoint(bvals, j, i, e0, a) # calculate value at this location
-                noxvals[i].append(newent)              # add it to the correct row
+                bvals[i][j] = (newent)                 # add it to the correct row
                 if (i == 0) and (j == 0):              # if at the start, overwrite delta automatically
                     delta = abs(bvals[i][j] - newent)
                 else:                                  # else compare and update delta as needed
                     delta = max(delta, abs(bvals[i][j] - newent))
-        
-        bvals = copy.deepcopy(noxvals)                 # make new matrix main matrix
-        noxvals = []                                   # reset the new matrix
     
     return bvals                                       # return the new matrix
 
