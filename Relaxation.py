@@ -22,34 +22,35 @@ def ItThrough(boxvals, target, e0, a):
 
     while delta > target:          # while loop until reach target accuracy
 
-        for i in range(len(bvals)):                  # for loop iterate through rows
-            noxvals.append([])                       # add new row to new matrix
-            for j in range(len(bvals[i])):           # iterate through columns
-                newent = calcpoint(bvals, j, i, e0, a)   # calculate value at this location
-                noxvals[i].append(newent)            # add it to the correct row
-                if (i == 0) and (j == 0):            # if at the start, overwrite delta automatically
+        for i in range(len(bvals)):                    # for loop iterate through rows
+            noxvals.append([])                         # add new row to new matrix
+            for j in range(len(bvals[i])):             # iterate through columns
+                newent = calcpoint(bvals, j, i, e0, a) # calculate value at this location
+                noxvals[i].append(newent)              # add it to the correct row
+                if (i == 0) and (j == 0):              # if at the start, overwrite delta automatically
                     delta = abs(bvals[i][j] - newent)
-                else:                                # else compare and update delta as needed
+                else:                                  # else compare and update delta as needed
                     delta = max(delta, abs(bvals[i][j] - newent))
         
-        bvals = copy.deepcopy(noxvals)               # make new matrix main matrix
-        noxvals = []                                 # reset the new matrix
+        bvals = copy.deepcopy(noxvals)                 # make new matrix main matrix
+        noxvals = []                                   # reset the new matrix
     
-    return bvals                                     # return the new matrix
+    return bvals                                       # return the new matrix
 
 def draw(bvals):
     pylab.imshow(bvals) # make the density plot
     pylab.gray()        # black to white scale
     pylab.show()        # show it
 
-def RelaxationMethod(N = 100, target = 10**(-6), e0 = 1, slen = 1, guessV = 0):
+def RelaxationMethod(N = 100, target = 10**(-6), e0 = 1, slen = 1, guessV = 0, draw = True):
 
-    a = slen / N   # length of each segment
+    a = slen / N                     # length of each segment
 
-    boxvals = []                        # empty array for the 
+    boxvals = []                     # empty array for the 
     for m in range(N):               # add rows
         boxvals.append([])
         for n in range(N):           # add columns
             boxvals[m].append(guessV)   
  
     tableVals = ItThrough(boxvals, target, e0, a)
+    draw(tableVals)
