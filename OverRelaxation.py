@@ -1,7 +1,7 @@
 import copy
 import pylab
 
-def calcpoint(allvals, x, y, e0, a):
+def calcpoint(allvals, x, y, e0, a, w):
 
     leni = len(allvals) - 1
     
@@ -12,9 +12,9 @@ def calcpoint(allvals, x, y, e0, a):
     elif (( y * a >= leni//4) and (y * a <= 3*leni//4)) and (x * a == (2*leni // 3)): # right plate is pos 1 voltage
         return 1
     else:                                                                             # calc and return intermediary points
-        return (1/4) * (allvals[y][x + 1] + allvals[y][x - 1] + allvals[y + 1][x] + allvals[y - 1][x])
+        return ((1+w)/4) * (allvals[y][x + 1] + allvals[y][x - 1] + allvals[y + 1][x] + allvals[y - 1][x]) - w*allvals[y][x]
 
-def ItThrough(boxvals, target, e0, a):
+def ItThrough(boxvals, target, e0, a, w):
     bvals = copy.deepcopy(boxvals) # make a copy of the matrix
     noxvals = []                   # empty array for new matrix
     delta = 1                      # starting differenc enot super important bc change almost immediately
@@ -42,7 +42,7 @@ def draw(bvals):
     pylab.gray()        # black to white scale
     pylab.show()        # show it
 
-def OverRelaxation(N = 100, target = 10**(-6), e0 = 1, slen = 1, guessV = 0, draw = True):
+def OverRelaxation(w, N = 100, target = 10**(-6), e0 = 1, slen = 1, guessV = 0, draw = True):
 
     a = slen / N                     # length of each segment
 
@@ -52,5 +52,5 @@ def OverRelaxation(N = 100, target = 10**(-6), e0 = 1, slen = 1, guessV = 0, dra
         for n in range(N):           # add columns
             boxvals[m].append(guessV)   
  
-    tableVals = ItThrough(boxvals, target, e0, a)
+    tableVals = ItThrough(boxvals, target, e0, a, w)
     draw(tableVals)
