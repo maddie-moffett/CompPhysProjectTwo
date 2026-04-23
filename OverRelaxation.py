@@ -17,13 +17,14 @@ for m in range(snum):               # add rows
 
 def calcpoint(allvals, x, y, w):
     p = 0 # no charge densities here
+    leni = len(allvals) - 1
     
-    if (x == 0) or (y == 0) or (x == (len(allvals[y]) - 1)) or (y == (len(allvals) - 1)): # walls have 0 potential
+    if (x == 0) or (y == 0) or (x == (len(allvals[y]) - 1)) or (y == leni):           # walls have 0 potential
         return 0
-    elif (( y * a >= 0.2) and (y * a <= 0.8)) and (x * a == 0.2):                         # left plate is pos 1 voltage
-        return 1
-    elif (( y * a >= 0.2) and (y * a <= 0.8)) and  x * a == 0.8:                          # right plate is neg 1 voltage
+    elif (( y * a >= leni//4) and (y * a <= 3*leni//4)) and (x * a == (leni // 3)):   # left plate is neg 1 voltage
         return -1
+    elif (( y * a >= leni//4) and (y * a <= 3*leni//4)) and (x * a == (2*leni // 3)): # right plate is pos 1 voltage
+        return 1
     else:                                                                                 # calc and return intermediary points
         return (1/4) * (allvals[y][x + 1] + allvals[y][x - 1] + allvals[y + 1][x] + allvals[y - 1][x]) + ((w**2) / (4*e0)) * p
 
