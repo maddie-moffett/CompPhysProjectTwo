@@ -11,3 +11,6 @@ def PartC():
             mini = nmin
             minnum = w
     return minnum
+
+def PartD():
+    w = PartC()
