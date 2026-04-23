@@ -55,5 +55,6 @@ def RelaxationMethod(N = 100, target = 10**(-6), e0 = 1, slen = 1, guessV = 0, d
             boxvals[m].append(guessV)   
  
     tableVals, n = ItThrough(boxvals, target, e0, a)
-    draw(tableVals)
+    if draw:
+        draw(tableVals)
     return n
