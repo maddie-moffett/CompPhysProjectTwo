@@ -19,6 +19,7 @@ def ItThrough(boxvals, target, e0, a):
     noxvals = []                   # empty array for new matrix
     delta = 1                      # starting differenc enot super important bc change almost immediately
 
+    n = 0                          # track number of iterations
 
     while delta > target:          # while loop until reach target accuracy
 
@@ -34,8 +35,9 @@ def ItThrough(boxvals, target, e0, a):
         
         bvals = copy.deepcopy(noxvals)                 # make new matrix main matrix
         noxvals = []                                   # reset the new matrix
+        n += 1                                         # increment number of iterations
     
-    return bvals                                       # return the new matrix
+    return bvals, n                                    # return the new matrix
 
 def draw(bvals):
     pylab.imshow(bvals) # make the density plot
@@ -52,5 +54,6 @@ def RelaxationMethod(N = 100, target = 10**(-6), e0 = 1, slen = 1, guessV = 0, d
         for n in range(N):           # add columns
             boxvals[m].append(guessV)   
  
-    tableVals = ItThrough(boxvals, target, e0, a)
+    tableVals, n = ItThrough(boxvals, target, e0, a)
     draw(tableVals)
+    return n
