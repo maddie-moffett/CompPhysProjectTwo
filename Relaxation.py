@@ -1,7 +1,7 @@
 import copy
 import pylab
 
-def calcpoint(allvals, x, y, e0, a):
+def calcpoint(allvals, x, y, a):
 
     leni = len(allvals) - 1
     
@@ -14,7 +14,7 @@ def calcpoint(allvals, x, y, e0, a):
     else:                                                                             # calc and return intermediary points
         return (1/4) * (allvals[y][x + 1] + allvals[y][x - 1] + allvals[y + 1][x] + allvals[y - 1][x])
 
-def ItThrough(boxvals, target, e0, a):
+def ItThrough(boxvals, target, a):
     bvals = copy.deepcopy(boxvals) # make a copy of the matrix
     noxvals = []                   # empty array for new matrix
     delta = 1                      # starting differenc enot super important bc change almost immediately
@@ -26,7 +26,7 @@ def ItThrough(boxvals, target, e0, a):
         for i in range(len(bvals)):                    # for loop iterate through rows
             noxvals.append([])                         # add new row to new matrix
             for j in range(len(bvals[i])):             # iterate through columns
-                newent = calcpoint(bvals, j, i, e0, a) # calculate value at this location
+                newent = calcpoint(bvals, j, i, a) # calculate value at this location
                 noxvals[i].append(newent)              # add it to the correct row
                 if (i == 0) and (j == 0):              # if at the start, overwrite delta automatically
                     delta = abs(bvals[i][j] - newent)
@@ -44,7 +44,7 @@ def draw(bvals):
     pylab.gray()        # black to white scale
     pylab.show()        # show it
 
-def RelaxationMethod(N = 100, target = 10**(-6), e0 = 1, slen = 1, guessV = 0, draw = True):
+def RelaxationMethod(N = 100, target = 10**(-6), slen = 1, guessV = 0, draw = True):
 
     a = slen / N                     # length of each segment
 
@@ -54,7 +54,7 @@ def RelaxationMethod(N = 100, target = 10**(-6), e0 = 1, slen = 1, guessV = 0, d
         for n in range(N):           # add columns
             boxvals[m].append(guessV)   
  
-    tableVals, n = ItThrough(boxvals, target, e0, a)
+    tableVals, n = ItThrough(boxvals, target, a)
     if draw:
         draw(tableVals)
     return n

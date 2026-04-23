@@ -1,7 +1,7 @@
 import copy
 import pylab
 
-def calcpoint(allvals, x, y, e0, a, w):
+def calcpoint(allvals, x, y, a, w):
 
     leni = len(allvals) - 1
     
@@ -14,7 +14,7 @@ def calcpoint(allvals, x, y, e0, a, w):
     else:                                                                             # calc and return intermediary points
         return ((1+w)/4) * (allvals[y][x + 1] + allvals[y][x - 1] + allvals[y + 1][x] + allvals[y - 1][x]) - w*allvals[y][x]
 
-def ItThrough(boxvals, target, e0, a, w):
+def ItThrough(boxvals, target, a, w):
     bvals = copy.deepcopy(boxvals) # make a copy of the matrix
     delta = 1                      # starting differenc enot super important bc change almost immediately
 
@@ -24,7 +24,7 @@ def ItThrough(boxvals, target, e0, a, w):
 
         for i in range(len(bvals)):                    # for loop iterate through rows
             for j in range(len(bvals[i])):             # iterate through columns
-                newent = calcpoint(bvals, j, i, e0, a) # calculate value at this location
+                newent = calcpoint(bvals, j, i, a) # calculate value at this location
                 bvals[i][j] = (newent)                 # add it to the correct row
                 if (i == 0) and (j == 0):              # if at the start, overwrite delta automatically
                     delta = abs(bvals[i][j] - newent)
@@ -40,7 +40,7 @@ def draw(bvals):
     pylab.gray()        # black to white scale
     pylab.show()        # show it
 
-def OverRelaxation(w, N = 100, target = 10**(-6), e0 = 1, slen = 1, guessV = 0, draw = True):
+def OverRelaxation(w, N = 100, target = 10**(-6), slen = 1, guessV = 0, draw = True):
 
     a = slen / N                     # length of each segment
 
@@ -50,7 +50,7 @@ def OverRelaxation(w, N = 100, target = 10**(-6), e0 = 1, slen = 1, guessV = 0, 
         for n in range(N):           # add columns
             boxvals[m].append(guessV)   
  
-    tableVals, n = ItThrough(boxvals, target, e0, a, w)
+    tableVals, n = ItThrough(boxvals, target, a, w)
     if draw:
         draw(tableVals)
     return n
