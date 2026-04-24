@@ -40,7 +40,7 @@ def ItThrough(boxvals, target, a):
 def draw(bvals):
     pylab.imshow(bvals) # make the density plot
     pylab.gray()        # black to white scale
-    pylab.show()        # show it
+    pylab.show()
 
 def Relaxation(N = 100, target = 10**(-6), slen = 1, guessV = 0, drawit = True):
 
@@ -58,4 +58,4 @@ def Relaxation(N = 100, target = 10**(-6), slen = 1, guessV = 0, drawit = True):
     return n
 
 if __name__ == "__main__":
-    Relaxation()
+    Relaxation(N = 400)

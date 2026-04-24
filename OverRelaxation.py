@@ -38,7 +38,7 @@ def ItThrough(boxvals, target, a, w):
 def draw(bvals):
     pylab.imshow(bvals) # make the density plot
     pylab.gray()        # black to white scale
-    pylab.show()        # show it
+    pylab.show()
 
 def OverRelaxation(w, N = 100, target = 10**(-6), slen = 1, guessV = 0, drawit = True):
 
@@ -56,4 +56,4 @@ def OverRelaxation(w, N = 100, target = 10**(-6), slen = 1, guessV = 0, drawit =
     return n
 
 if __name__ == "__main__":
-    OverRelaxation(1)
+    OverRelaxation(1.5, N = 400)

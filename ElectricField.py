@@ -32,4 +32,4 @@ def PartD(w = None):
     pylab.show()
 
 if __name__ == "__main__":
-    PartD(1.5)
+    PartD()
