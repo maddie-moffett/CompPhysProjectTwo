@@ -16,20 +16,19 @@ def calcpoint(allvals, x, y, a, w):
 
 def ItThrough(boxvals, target, a, w):
     bvals = copy.deepcopy(boxvals) # make a copy of the matrix
-    delta = 1                      # starting differenc enot super important bc change almost immediately
+    delta = 1                      # starting difference not super important bc change almost immediately
 
     n = 0                          # track number of iterations
 
     while delta > target:          # while loop until reach target accuracy
 
+        delta = 0                  # reset delta at the start of each pass through
+
         for i in range(len(bvals)):                    # for loop iterate through rows
             for j in range(len(bvals[i])):             # iterate through columns
-                newent = calcpoint(bvals, j, i, a, w) # calculate value at this location
-                bvals[i][j] = (newent)                 # add it to the correct row
-                if (i == 0) and (j == 0):              # if at the start, overwrite delta automatically
-                    delta = abs(bvals[i][j] - newent)
-                else:                                  # else compare and update delta as needed
-                    delta = max(delta, abs(bvals[i][j] - newent))
+                newent = calcpoint(bvals, j, i, a, w)  # calculate value at this location
+                delta = max(delta, abs(bvals[i][j] - newent)) # compare and update delta as needed
+                bvals[i][j] = (newent)                 # add new val to the correct row
         
         n += 1                                          # increment number of iterations
     
@@ -54,3 +53,6 @@ def OverRelaxation(w, N = 100, target = 10**(-6), slen = 1, guessV = 0, drawit =
     if drawit:
         draw(tableVals)
     return n
+
+if __name__ == "__main__":
+    OverRelaxation(1)

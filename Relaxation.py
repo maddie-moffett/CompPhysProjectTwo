@@ -23,15 +23,14 @@ def ItThrough(boxvals, target, a):
 
     while delta > target:          # while loop until reach target accuracy
 
+        delta = 0                  # reset delta
+
         for i in range(len(bvals)):                    # for loop iterate through rows
             noxvals.append([])                         # add new row to new matrix
             for j in range(len(bvals[i])):             # iterate through columns
-                newent = calcpoint(bvals, j, i, a) # calculate value at this location
+                newent = calcpoint(bvals, j, i, a)     # calculate value at this location
                 noxvals[i].append(newent)              # add it to the correct row
-                if (i == 0) and (j == 0):              # if at the start, overwrite delta automatically
-                    delta = abs(bvals[i][j] - newent)
-                else:                                  # else compare and update delta as needed
-                    delta = max(delta, abs(bvals[i][j] - newent))
+                delta = max(delta, abs(bvals[i][j] - newent)) # update delta as needed
         
         bvals = copy.deepcopy(noxvals)                 # make new matrix main matrix
         noxvals = []                                   # reset the new matrix
@@ -57,3 +56,6 @@ def Relaxation(N = 100, target = 10**(-6), slen = 1, guessV = 0, drawit = True):
     if drawit:
         draw(tableVals)
     return n
+
+if __name__ == "__main__":
+    Relaxation()

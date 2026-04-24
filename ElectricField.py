@@ -18,7 +18,7 @@ def PartD():
     overrexpoints = []
     rexpoints = []
     xs = []
-    for n in range(50, 450, 50):
+    for n in [50, 100, 200, 400]:
         overrexpoints.append(OverRelaxation(w, N = n, drawit = False))
         rexpoints.append(Relaxation(N = n, drawit = False))
         xs.append(n)
