@@ -11,6 +11,7 @@ def PartC():
         if nmin <= mini:
             mini = nmin
             minnum = w
+    print(minnum)
     return minnum
 
 def PartD():
