@@ -32,7 +32,6 @@ def ItThrough(boxvals, target, a, w):
                 bvals[i][j] = (newent)                 # add new val to the correct row
         
         n += 1                                          # increment number of iterations
-        print(n)
     
     return bvals, n                                     # return the new matrix
 
