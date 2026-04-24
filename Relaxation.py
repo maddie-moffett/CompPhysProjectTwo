@@ -44,7 +44,7 @@ def draw(bvals):
     pylab.gray()        # black to white scale
     pylab.show()        # show it
 
-def RelaxationMethod(N = 100, target = 10**(-6), slen = 1, guessV = 0, draw = True):
+def Relaxation(N = 100, target = 10**(-6), slen = 1, guessV = 0, draw = True):
 
     a = slen / N                     # length of each segment
 

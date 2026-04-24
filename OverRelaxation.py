@@ -24,7 +24,7 @@ def ItThrough(boxvals, target, a, w):
 
         for i in range(len(bvals)):                    # for loop iterate through rows
             for j in range(len(bvals[i])):             # iterate through columns
-                newent = calcpoint(bvals, j, i, a) # calculate value at this location
+                newent = calcpoint(bvals, j, i, a, w) # calculate value at this location
                 bvals[i][j] = (newent)                 # add it to the correct row
                 if (i == 0) and (j == 0):              # if at the start, overwrite delta automatically
                     delta = abs(bvals[i][j] - newent)
