@@ -11,11 +11,11 @@ def PartC():
         if nmin <= mini:
             mini = nmin
             minnum = w
-    print(minnum)
     return minnum
 
-def PartD():
-    w = PartC()
+def PartD(w = None):
+    if w is None:
+        w = PartC()
     overrexpoints = []
     rexpoints = []
     xs = []
@@ -32,4 +32,4 @@ def PartD():
     pylab.show()
 
 if __name__ == "__main__":
-    PartD()
+    PartD(1.5)
