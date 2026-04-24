@@ -11,7 +11,7 @@ def calcpoint(allvals, x, y, a):
         return -1
     elif (( y >= leni//4) and (y <= 3*leni//4)) and (x == (2*leni // 3)): # right plate is pos 1 voltage
         return 1
-    else:                                                                             # calc and return intermediary points
+    else:                                                                 # calc and return intermediary points
         return (1/4) * (allvals[y][x + 1] + allvals[y][x - 1] + allvals[y + 1][x] + allvals[y - 1][x])
 
 def ItThrough(boxvals, target, a):

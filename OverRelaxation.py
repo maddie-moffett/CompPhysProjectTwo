@@ -11,8 +11,9 @@ def calcpoint(allvals, x, y, a, w):
         return -1
     elif (( y >= leni//4) and (y <= 3*leni//4)) and (x == (2*leni // 3)): # right plate is pos 1 voltage
         return 1
-    else:                                                                             # calc and return intermediary points
-        return ((1+w)/4) * (allvals[y][x + 1] + allvals[y][x - 1] + allvals[y + 1][x] + allvals[y - 1][x]) - w*allvals[y][x]
+    else:                                                                 # calc and return intermediary points
+        newguess = (1/4) * (allvals[y][x + 1] + allvals[y][x - 1] + allvals[y + 1][x] + allvals[y - 1][x])
+        return allvals[y][x] + w*(newguess - allvals[y][x])
 
 def ItThrough(boxvals, target, a, w):
     bvals = copy.deepcopy(boxvals) # make a copy of the matrix
@@ -31,6 +32,7 @@ def ItThrough(boxvals, target, a, w):
                 bvals[i][j] = (newent)                 # add new val to the correct row
         
         n += 1                                          # increment number of iterations
+        print(n)
     
     return bvals, n                                     # return the new matrix
 
