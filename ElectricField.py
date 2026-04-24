@@ -7,7 +7,7 @@ def PartC():
     mini = inf
     minnum = 0
     for w in [1.0, 1.1, 1.2, 1.3, 1.4, 1.5]:
-        nmin = OverRelaxation(w, draw = False)
+        nmin = OverRelaxation(w, drawit = False)
         if nmin <= mini:
             mini = nmin
             minnum = w
@@ -19,8 +19,8 @@ def PartD():
     rexpoints = []
     xs = []
     for n in range(50, 450, 50):
-        overrexpoints.append(OverRelaxation(w, N = n, draw = False))
-        rexpoints.append(Relaxation(N = n, draw = False))
+        overrexpoints.append(OverRelaxation(w, N = n, drawit = False))
+        rexpoints.append(Relaxation(N = n, drawit = False))
         xs.append(n)
     pylab.plot(xs, overrexpoints, label = "SOR Method")
     pylab.plot(xs, rexpoints, label = "Basic Jacobi Convergence")

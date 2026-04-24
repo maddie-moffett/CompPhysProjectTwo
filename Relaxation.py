@@ -5,11 +5,11 @@ def calcpoint(allvals, x, y, a):
 
     leni = len(allvals) - 1
     
-    if (x == 0) or (y == 0) or (x == (len(allvals[y]) - 1)) or (y == leni):           # walls have 0 potential
+    if (x == 0) or (y == 0) or (x == leni) or (y == leni):                # walls have 0 potential
         return 0
-    elif (( y * a >= leni//4) and (y * a <= 3*leni//4)) and (x * a == (leni // 3)):   # left plate is neg 1 voltage
+    elif (( y >= leni//4) and (y <= 3*leni//4)) and (x == (leni // 3)):   # left plate is neg 1 voltage
         return -1
-    elif (( y * a >= leni//4) and (y * a <= 3*leni//4)) and (x * a == (2*leni // 3)): # right plate is pos 1 voltage
+    elif (( y >= leni//4) and (y <= 3*leni//4)) and (x == (2*leni // 3)): # right plate is pos 1 voltage
         return 1
     else:                                                                             # calc and return intermediary points
         return (1/4) * (allvals[y][x + 1] + allvals[y][x - 1] + allvals[y + 1][x] + allvals[y - 1][x])
@@ -36,7 +36,6 @@ def ItThrough(boxvals, target, a):
         bvals = copy.deepcopy(noxvals)                 # make new matrix main matrix
         noxvals = []                                   # reset the new matrix
         n += 1                                         # increment number of iterations
-    
     return bvals, n                                    # return the new matrix
 
 def draw(bvals):
@@ -44,7 +43,7 @@ def draw(bvals):
     pylab.gray()        # black to white scale
     pylab.show()        # show it
 
-def Relaxation(N = 100, target = 10**(-6), slen = 1, guessV = 0, draw = True):
+def Relaxation(N = 100, target = 10**(-6), slen = 1, guessV = 0, drawit = True):
 
     a = slen / N                     # length of each segment
 
@@ -55,6 +54,6 @@ def Relaxation(N = 100, target = 10**(-6), slen = 1, guessV = 0, draw = True):
             boxvals[m].append(guessV)   
  
     tableVals, n = ItThrough(boxvals, target, a)
-    if draw:
+    if drawit:
         draw(tableVals)
     return n
