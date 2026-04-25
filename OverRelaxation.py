@@ -56,6 +56,3 @@ def OverRelaxation(w, N = 100, target = 10**(-6), slen = 1, guessV = 0, drawit =
     if giveb:
         return tableVals
     return n
-
-if __name__ == "__main__":
-    OverRelaxation(1.5, N = 100)

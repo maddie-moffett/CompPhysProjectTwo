@@ -54,6 +54,3 @@ def Relaxation(N = 100, target = 10**(-6), slen = 1, guessV = 0, drawit = True):
     if drawit:
         draw(tableVals)
     return n
-
-if __name__ == "__main__":
-    Relaxation(N = 400)

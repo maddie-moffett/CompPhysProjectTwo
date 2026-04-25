@@ -68,6 +68,3 @@ def PartE():
         pylab.show()
 
         pylab.clf()
-
-if __name__ == "__main__":
-    PartE()
