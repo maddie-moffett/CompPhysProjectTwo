@@ -40,7 +40,7 @@ def draw(bvals):
     pylab.gray()        # black to white scale
     pylab.show()
 
-def OverRelaxation(w, N = 100, target = 10**(-6), slen = 1, guessV = 0, drawit = True):
+def OverRelaxation(w, N = 100, target = 10**(-6), slen = 1, guessV = 0, drawit = True, giveb = False):
 
     a = slen / N                     # length of each segment
 
@@ -53,7 +53,9 @@ def OverRelaxation(w, N = 100, target = 10**(-6), slen = 1, guessV = 0, drawit =
     tableVals, n = ItThrough(boxvals, target, a, w)
     if drawit:
         draw(tableVals)
+    if giveb:
+        return tableVals
     return n
 
 if __name__ == "__main__":
-    OverRelaxation(1.5, N = 400)
+    OverRelaxation(1.5, N = 100)

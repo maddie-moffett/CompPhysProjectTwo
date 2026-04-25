@@ -31,5 +31,39 @@ def PartD(w = None):
     pylab.legend()
     pylab.show()
 
+def ElectricField(boxvals, d, s = 1):
+    efieldXdir = []
+    efieldYdir = []
+    efieldXpos = []
+    efieldYpos = []
+    for m in range(0, len(boxvals), s):
+        for n in range(0, len(boxvals[m]), s):
+            if m == 0:
+                mdiff = (boxvals[m+1][n] - boxvals[m][n]) / (d)
+            elif m == len(boxvals) - 1:
+                mdiff = (boxvals[m][n] - boxvals[m-1][n]) / (d)
+            else:
+                mdiff = (boxvals[m-1][n] - boxvals[m+1][n]) / (d*2)
+            if n == 0:
+                ndiff = (boxvals[m][n+1] - boxvals[m][n]) / (d)
+            elif n == len(boxvals) - 1:
+                ndiff = (boxvals[m][n] - boxvals[m][n-1]) / (d)
+            else:
+                ndiff = (boxvals[m][n-1] - boxvals[m][n+1]) / (d*2)
+            efieldYdir.append(-mdiff)
+            efieldXdir.append(-ndiff)
+            efieldYpos.append(m)
+            efieldXpos.append(n)
+    return efieldXpos, efieldYpos, efieldXdir, efieldYdir
+
+def PartE():
+    N = 100
+    s = 1
+    d = N / 100
+    tableVals = OverRelaxation(1.5, drawit = False, giveb = True)
+    efieldYpos, efieldXpos, efieldYdir, efieldXdir = ElectricField(tableVals, d = d, s = s)
+    pylab.quiver(efieldYpos, efieldXpos, efieldYdir, efieldXdir)
+    pylab.show()
+
 if __name__ == "__main__":
-    PartD()
+    PartE()
