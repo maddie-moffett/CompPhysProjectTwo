@@ -50,7 +50,7 @@ def Relaxation(N = 100, target = 10**(-6), slen = 1, guessV = 0, drawit = True):
         for n in range(N):           # add columns
             boxvals[m].append(guessV)   
  
-    tableVals, n = ItThrough(boxvals, target, a)
+    tableVals, n = ItThrough(boxvals, target)
     if drawit:
         draw(tableVals)
     return n
