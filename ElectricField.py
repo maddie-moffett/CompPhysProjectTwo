@@ -39,26 +39,26 @@ def ElectricField(boxvals, d, s = 1):
     for m in range(0, len(boxvals), s):
         for n in range(0, len(boxvals[m]), s):
             if m == 0:
-                mdiff = (boxvals[m+1][n] - boxvals[m][n]) / (d)
+                mdiff = (boxvals[m][n] - boxvals[m+1][n]) / (d)
             elif m == len(boxvals) - 1:
-                mdiff = (boxvals[m][n] - boxvals[m-1][n]) / (d)
+                mdiff = (boxvals[m-1][n] - boxvals[m][n]) / (d)
             else:
                 mdiff = (boxvals[m-1][n] - boxvals[m+1][n]) / (d*2)
             if n == 0:
-                ndiff = (boxvals[m][n+1] - boxvals[m][n]) / (d)
-            elif n == len(boxvals) - 1:
-                ndiff = (boxvals[m][n] - boxvals[m][n-1]) / (d)
+                ndiff = (boxvals[m][n] - boxvals[m][n+1]) / (d)
+            elif n == len(boxvals[m]) - 1:
+                ndiff = (boxvals[m][n-1] - boxvals[m][n]) / (d)
             else:
                 ndiff = (boxvals[m][n-1] - boxvals[m][n+1]) / (d*2)
-            efieldYdir.append(-mdiff)
-            efieldXdir.append(-ndiff)
+            efieldYdir.append(mdiff)
+            efieldXdir.append(ndiff)
             efieldYpos.append(m)
             efieldXpos.append(n)
     return efieldXpos, efieldYpos, efieldXdir, efieldYdir
 
 def PartE():
     N = 100
-    s = 1
+    s = 2
     d = N / 100
     tableVals = OverRelaxation(1.5, drawit = False, giveb = True)
     efieldYpos, efieldXpos, efieldYdir, efieldXdir = ElectricField(tableVals, d = d, s = s)
