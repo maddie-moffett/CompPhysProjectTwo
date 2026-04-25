@@ -1,7 +1,7 @@
 import copy
 import pylab
 
-def calcpoint(allvals, x, y, a):
+def calcpoint(allvals, x, y):
 
     leni = len(allvals) - 1
     
@@ -14,7 +14,7 @@ def calcpoint(allvals, x, y, a):
     else:                                                                 # calc and return intermediary points
         return (1/4) * (allvals[y][x + 1] + allvals[y][x - 1] + allvals[y + 1][x] + allvals[y - 1][x])
 
-def ItThrough(boxvals, target, a):
+def ItThrough(boxvals, target):
     bvals = copy.deepcopy(boxvals) # make a copy of the matrix
     noxvals = []                   # empty array for new matrix
     delta = 1                      # starting differenc enot super important bc change almost immediately
@@ -28,7 +28,7 @@ def ItThrough(boxvals, target, a):
         for i in range(len(bvals)):                    # for loop iterate through rows
             noxvals.append([])                         # add new row to new matrix
             for j in range(len(bvals[i])):             # iterate through columns
-                newent = calcpoint(bvals, j, i, a)     # calculate value at this location
+                newent = calcpoint(bvals, j, i)        # calculate value at this location
                 noxvals[i].append(newent)              # add it to the correct row
                 delta = max(delta, abs(bvals[i][j] - newent)) # update delta as needed
         
@@ -43,8 +43,6 @@ def draw(bvals):
     pylab.show()
 
 def Relaxation(N = 100, target = 10**(-6), slen = 1, guessV = 0, drawit = True):
-
-    a = slen / N                     # length of each segment
 
     boxvals = []                     # empty array for the 
     for m in range(N):               # add rows

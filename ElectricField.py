@@ -60,10 +60,14 @@ def PartE():
     N = 100
     s = 2
     d = N / 100
-    tableVals = OverRelaxation(1.5, drawit = False, giveb = True)
-    efieldYpos, efieldXpos, efieldYdir, efieldXdir = ElectricField(tableVals, d = d, s = s)
-    pylab.quiver(efieldYpos, efieldXpos, efieldYdir, efieldXdir)
-    pylab.show()
+    for disss in range(3, 13, 2):
+        tableVals = OverRelaxation(1.5, drawit = False, giveb = True, dist = disss)
+        efieldYpos, efieldXpos, efieldYdir, efieldXdir = ElectricField(tableVals, d = d, s = s)
+        pylab.quiver(efieldYpos, efieldXpos, efieldYdir, efieldXdir)
+        pylab.title("Electric Field with a Distance of L/" + str(disss) + " Between Plates")
+        pylab.show()
+
+        pylab.clf()
 
 if __name__ == "__main__":
     PartE()
