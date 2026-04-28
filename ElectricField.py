@@ -39,22 +39,23 @@ def PartC(drawit = False):
     return w                         # return the averaged optimal w
 
 def PartD(w = None):
-    if w is None:
-        w = PartC()
-    overrexpoints = []
-    rexpoints = []
-    xs = []
-    for n in [50, 100, 200, 400]:
-        overrexpoints.append(OverRelaxation(w, N = n, drawit = False))
-        rexpoints.append(Relaxation(N = n, drawit = False))
-        xs.append(n)
-    pylab.plot(xs, overrexpoints, label = "SOR Method")
-    pylab.plot(xs, rexpoints, label = "Basic Jacobi Convergence")
-    pylab.title("Number of Iterations per Number of Grid Points")
-    pylab.ylabel("Number of Iterations")
-    pylab.xlabel("Number of Grid Points")
-    pylab.legend()
-    pylab.show()
+    if w is None:            # if weight is not provided, find the optimal
+        w = PartC()          # note: by default doesn't draw the plot
+    overrexpoints = []       # initialize array for overrelaxation N vals
+    rexpoints = []           # initialize array for normal relaxation N vals
+    xs = [50, 100, 200, 400] # initialize array for the ns using provided nvals
+
+    for n in xs:                                                       # iterate through the provided points
+        overrexpoints.append(OverRelaxation(w, N = n, drawit = False)) # append the overrelaxation number of iterations
+        rexpoints.append(Relaxation(N = n, drawit = False))            # append the normal relaxation number of iterations
+
+    pylab.plot(xs, overrexpoints, label = "SOR Method")           # plot the overrelaxation points; label the line
+    pylab.plot(xs, rexpoints, label = "Basic Jacobi Convergence") # plot the normal relaxation points; label the line
+    pylab.title("Number of Iterations per Number of Grid Points") # title the graph
+    pylab.ylabel("Number of Iterations")                          # y axis is number of iterations
+    pylab.xlabel("Number of Grid Points")                         # x axis is the number of grid points
+    pylab.legend()                                                # show legend
+    pylab.show()                                                  # show the plot
 
 def ElectricField(boxvals, d, s = 1):
     efieldXdir = []
