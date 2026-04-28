@@ -3,40 +3,40 @@ from OverRelaxation import OverRelaxation
 import pylab
 
 def PartC(drawit = False):
-    ws = []
-    its = []
-    wmin = 1
-    wmax = 2
-    w1 = wmax - (wmax - wmin)/1.618
-    w2 = wmin + (wmax - wmin)/1.618
+    ws = []                         # empty list for the w values
+    its = []                        # empty list for the number of iterations per w
+    wmin = 1                        # minimum w val
+    wmax = 2                        # maximum w value
+    w1 = wmax - (wmax - wmin)/1.618 # first w val to test
+    w2 = wmin + (wmax - wmin)/1.618 # second w val to test
 
-    while (wmax - wmin) > 0.001:
-        smallnum = OverRelaxation(w1, drawit = False)
-        bignum = OverRelaxation(w2, drawit = False)
+    while (wmax - wmin) > 0.001:                      # while they are too far apart
+        smallnum = OverRelaxation(w1, drawit = False) # first num of iterations from w1
+        bignum = OverRelaxation(w2, drawit = False)   # second num of iterations from w2
 
-        ws.append(w1)
-        ws.append(w2)
-        its.append(smallnum)
-        its.append(bignum)
+        ws.append(w1)                                 # save the w1 val
+        ws.append(w2)                                 # save the w2 val
+        its.append(smallnum)                          # save the num iterations 1 val
+        its.append(bignum)                            # save the num iterations 2 val
 
-        if smallnum < bignum:
+        if smallnum < bignum:                         # if in the left section, move wmax down
             wmax = w2
-        elif smallnum >= bignum:
+        elif smallnum >= bignum:                      # if in the right section, move wmin up
             wmin = w1
 
-        w1 = wmax - (wmax - wmin)/1.618
-        w2 = wmin + (wmax - wmin)/1.618
+        w1 = wmax - (wmax - wmin)/1.618               # update w1
+        w2 = wmin + (wmax - wmin)/1.618               # update w2
 
-    w = (wmin + wmax) / 2
+    w = (wmin + wmax) / 2            # after while loop, average the two w vals for the optimal
 
-    if drawit:
-        pylab.plot(ws, its, "x")
-        pylab.xlabel("Weight Value")
-        pylab.ylabel("Number of Iterations")
-        pylab.title("Number of Iterations per Value of W")
-        pylab.show()
+    if drawit:                                             # if drawing
+        pylab.plot(ws, its, "x")                           # plot the ws and their its
+        pylab.xlabel("Weight Value")                       # xs are the weight for overrelaxation
+        pylab.ylabel("Number of Iterations")               # ys are the number of iterations
+        pylab.title("Number of Iterations per Value of W") # Title of the plot
+        pylab.show()                                       # show the plot
 
-    return w
+    return w                         # return the averaged optimal w
 
 def PartD(w = None):
     if w is None:
