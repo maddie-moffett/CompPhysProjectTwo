@@ -58,29 +58,30 @@ def PartD(w = None):
     pylab.show()                                                  # show the plot
 
 def ElectricField(boxvals, d, s = 1):
-    efieldXdir = []
-    efieldYdir = []
-    efieldXpos = []
-    efieldYpos = []
-    for m in range(0, len(boxvals), s):
-        for n in range(0, len(boxvals[m]), s):
+    efieldXdir = [] # array for the x direction of efield
+    efieldYdir = [] # array for the y direction of efield
+    efieldXpos = [] # array for the x position of efield
+    efieldYpos = [] # array for the y position of efield
+
+    for m in range(0, len(boxvals), s):                             # iterate through rows of voltage plot
+        for n in range(0, len(boxvals[m]), s):                      # iterate through columns of voltage plot
             if m == 0:
-                mdiff = (boxvals[m][n] - boxvals[m+1][n]) / (d)
+                mdiff = (boxvals[m][n] - boxvals[m+1][n]) / (d)     # if at the start of the row, don't include left side in finite difference
             elif m == len(boxvals) - 1:
-                mdiff = (boxvals[m-1][n] - boxvals[m][n]) / (d)
+                mdiff = (boxvals[m-1][n] - boxvals[m][n]) / (d)     # if at the end of the row, don't include right side in finite difference
             else:
-                mdiff = (boxvals[m-1][n] - boxvals[m+1][n]) / (d*2)
+                mdiff = (boxvals[m-1][n] - boxvals[m+1][n]) / (2*d) # else, include right and left sides
             if n == 0:
-                ndiff = (boxvals[m][n] - boxvals[m][n+1]) / (d)
+                ndiff = (boxvals[m][n] - boxvals[m][n+1]) / (d)     # if at top of column, don't include above in finite difference
             elif n == len(boxvals[m]) - 1:
-                ndiff = (boxvals[m][n-1] - boxvals[m][n]) / (d)
+                ndiff = (boxvals[m][n-1] - boxvals[m][n]) / (d)     # if at bottom of column, don't include below in finite difference
             else:
-                ndiff = (boxvals[m][n-1] - boxvals[m][n+1]) / (d*2)
-            efieldYdir.append(mdiff)
-            efieldXdir.append(ndiff)
-            efieldYpos.append(m)
-            efieldXpos.append(n)
-    return efieldXpos, efieldYpos, efieldXdir, efieldYdir
+                ndiff = (boxvals[m][n-1] - boxvals[m][n+1]) / (d*2) # else include top and bottom
+            efieldYdir.append(mdiff)                                # append y direction
+            efieldXdir.append(ndiff)                                # append x direction
+            efieldYpos.append(m)                                    # append y position
+            efieldXpos.append(n)                                    # append x position
+    return efieldXpos, efieldYpos, efieldXdir, efieldYdir           # return the four arrays
 
 def PartE():
     N = 100
