@@ -3,7 +3,7 @@ import pylab
 
 def calcpoint(allvals, x, y):
 
-    leni = len(allvals) - 1
+    leni = len(allvals) - 1                                               # leni is max index of list
     
     if (x == 0) or (y == 0) or (x == leni) or (y == leni):                # walls have 0 potential
         return 0
@@ -50,7 +50,7 @@ def Relaxation(N = 100, target = 10**(-6), slen = 1, guessV = 0, drawit = True):
         for n in range(N):           # add columns
             boxvals[m].append(guessV)   
  
-    tableVals, n = ItThrough(boxvals, target)
-    if drawit:
+    tableVals, n = ItThrough(boxvals, target) # iterate through and calculate voltages
+    if drawit:                                # if draw, then draw
         draw(tableVals)
-    return n
+    return n                                  # return number of iterations
