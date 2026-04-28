@@ -3,7 +3,7 @@ from OverRelaxation import OverRelaxation
 from math import inf
 import pylab
 
-def PartC():
+def PartC(drawit = False):
     ws = []
     its = []
     wmin = 1
@@ -30,11 +30,12 @@ def PartC():
 
     w = (wmin + wmax) / 2
 
-    pylab.plot(ws, its, "x")
-    pylab.xlabel("Weight Value")
-    pylab.ylabel("Number of Iterations")
-    pylab.title("Number of Iterations per Value of W")
-    pylab.show()
+    if drawit:
+        pylab.plot(ws, its, "x")
+        pylab.xlabel("Weight Value")
+        pylab.ylabel("Number of Iterations")
+        pylab.title("Number of Iterations per Value of W")
+        pylab.show()
 
     return w
 
@@ -95,4 +96,4 @@ def PartE():
         pylab.clf()
 
 if __name__ == "__main__":
-    print(PartC())
+    print(PartC(True))
