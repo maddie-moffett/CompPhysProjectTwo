@@ -4,14 +4,39 @@ from math import inf
 import pylab
 
 def PartC():
-    mini = inf
-    minnum = 0
-    for w in [1.0, 1.1, 1.2, 1.3, 1.4, 1.5]:
-        nmin = OverRelaxation(w, drawit = False)
-        if nmin <= mini:
-            mini = nmin
-            minnum = w
-    return minnum
+    ws = []
+    its = []
+    wmin = 1
+    wmax = 2
+    w1 = wmax - (wmax - wmin)/1.618
+    w2 = wmin + (wmax - wmin)/1.618
+
+    while (wmax - wmin) > 0.001:
+        smallnum = OverRelaxation(w1, drawit = False)
+        bignum = OverRelaxation(w2, drawit = False)
+
+        ws.append(w1)
+        ws.append(w2)
+        its.append(smallnum)
+        its.append(bignum)
+
+        if smallnum < bignum:
+            wmax = w2
+        elif smallnum >= bignum:
+            wmin = w1
+
+        w1 = wmax - (wmax - wmin)/1.618
+        w2 = wmin + (wmax - wmin)/1.618
+
+    w = (wmin + wmax) / 2
+
+    pylab.plot(ws, its, "x")
+    pylab.xlabel("Weight Value")
+    pylab.ylabel("Number of Iterations")
+    pylab.title("Number of Iterations per Value of W")
+    pylab.show()
+
+    return w
 
 def PartD(w = None):
     if w is None:
@@ -68,3 +93,6 @@ def PartE():
         pylab.show()
 
         pylab.clf()
+
+if __name__ == "__main__":
+    print(PartC())
