@@ -84,14 +84,14 @@ def ElectricField(boxvals, d, s = 1):
     return efieldXpos, efieldYpos, efieldXdir, efieldYdir           # return the four arrays
 
 def PartE():
-    N = 100
-    s = 2
-    d = N / 100
-    for disss in range(3, 13, 2):
-        tableVals = OverRelaxation(1.88, drawit = False, giveb = True, dist = disss)
-        efieldYpos, efieldXpos, efieldYdir, efieldXdir = ElectricField(tableVals, d = d, s = s)
-        pylab.quiver(efieldYpos, efieldXpos, efieldYdir, efieldXdir)
-        pylab.title("Electric Field with a Distance of L/" + str(disss) + " Between Plates")
-        pylab.show()
+    N = 100     # number of gridpoints
+    s = 2       # calculate at total gridpoints / s
+    d = N / 100 # width between gridpoints
+    for disss in range(3, 13, 2):                                                               # iterate through for distances at 1/3,1/5,1/7,1/9,1/11
+        tableVals = OverRelaxation(1.88, drawit = False, giveb = True, dist = disss)            # calculate the voltage values at each point on grid
+        efieldYpos, efieldXpos, efieldYdir, efieldXdir = ElectricField(tableVals, d = d, s = s) # use finite difference to calculate efield
+        pylab.quiver(efieldYpos, efieldXpos, efieldYdir, efieldXdir)                            # draw quiver plot
+        pylab.title("Electric Field with a Distance of L/" + str(disss) + " Between Plates")    # title the plot with the plate distance
+        pylab.show()                                                                            # show the plot
 
-        pylab.clf()
+        pylab.clf()                                                                             # clear plot for next iteration
