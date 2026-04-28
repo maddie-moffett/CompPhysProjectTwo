@@ -87,7 +87,7 @@ def PartE():
     s = 2
     d = N / 100
     for disss in range(3, 13, 2):
-        tableVals = OverRelaxation(1.5, drawit = False, giveb = True, dist = disss)
+        tableVals = OverRelaxation(1.88, drawit = False, giveb = True, dist = disss)
         efieldYpos, efieldXpos, efieldYdir, efieldXdir = ElectricField(tableVals, d = d, s = s)
         pylab.quiver(efieldYpos, efieldXpos, efieldYdir, efieldXdir)
         pylab.title("Electric Field with a Distance of L/" + str(disss) + " Between Plates")
@@ -96,4 +96,4 @@ def PartE():
         pylab.clf()
 
 if __name__ == "__main__":
-    print(PartC(True))
+    PartD(1.88)
