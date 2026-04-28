@@ -1,6 +1,5 @@
 from Relaxation import Relaxation
 from OverRelaxation import OverRelaxation
-from math import inf
 import pylab
 
 def PartC(drawit = False):
