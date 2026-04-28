@@ -3,9 +3,9 @@ import pylab
 
 def calcpoint(allvals, x, y, w, dist = 3):
 
-    leni = len(allvals) - 1
-    negposi = (leni * (dist//2)) // dist
-    posposi = (leni * ((dist//2) + 1)) // dist
+    leni = len(allvals) - 1                     # leni is max index
+    negposi = (leni * (dist//2)) // dist        # negative plate position calculation
+    posposi = (leni * ((dist//2) + 1)) // dist  # positive plate position calculation
     
     if (x == 0) or (y == 0) or (x == leni) or (y == leni):            # walls have 0 potential
         return 0
@@ -50,9 +50,9 @@ def OverRelaxation(w, N = 100, target = 10**(-6), slen = 1, guessV = 0, drawit =
         for n in range(N):           # add columns
             boxvals[m].append(guessV)   
  
-    tableVals, n = ItThrough(boxvals, target, w, dist)
-    if drawit:
+    tableVals, n = ItThrough(boxvals, target, w, dist) # iterate through and calculate vals
+    if drawit:            # if draw, then draw
         draw(tableVals)
-    if giveb:
+    if giveb:             # if return the table vals, return that
         return tableVals
-    return n
+    return n              # if not return table vals, return n
